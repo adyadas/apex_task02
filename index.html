@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Web Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #f0fdf4);
+  color: #333;
+  padding: 20px;
+}
+nav {
+  background: #1e3a8a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+nav a:hover {
+  color: #facc15;
+}
+
+/* Updated Layout */
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section Styles */
+section {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+section:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+}
+
+h2 {
+  color: #1e3a8a;
+  margin-bottom: 15px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+input, textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+button {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* To-Do List Styles */
+#todoList {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+#todoList li {
+  padding: 10px;
+  background: #e0f7fa;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#todoList li button {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+#todoList li button:hover {
+  background: #dc2626;
+}
+#formMsg {
+  margin-top: 10px;
+  font-weight: bold;
+}
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+  </style>
+</head>
+<body>
+  <nav>
+    <h1><i class="fas fa-code"></i> DevPro Site</h1>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#todo">To-Do</a></li>
+    </ul>
+  </nav>
+
+  <div class="grid-container">
+    <section class="content">
+      <h2>Welcome 👋</h2>
+      <p>Welcome to DevPro Site — your modern responsive interface powered by clean code and creativity! 🧑‍💻 Dive in to explore contact features, manage your tasks, and experience the beauty of web design in action.</p>
+
+    </section>
+
+    <section class="form-section" id="contact">
+      <h2>Contact Us 📩</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formMsg"></p>
+    </section>
+
+    <section class="todo-section" id="todo">
+      <h2>📝 My To-Do List</h2>
+      <input type="text" id="todoInput" placeholder="Add new task..." />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="todoList"></ul>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Adya Das. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Contact Form Validation
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const formMsg = document.getElementById("formMsg");
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!name || !email || !message) {
+        formMsg.textContent = "❗ All fields are required.";
+        formMsg.style.color = "red";
+      } else if (!emailPattern.test(email)) {
+        formMsg.textContent = "❗ Invalid email format.";
+        formMsg.style.color = "red";
+      } else {
+        formMsg.textContent = "✅ Message sent successfully!";
+        formMsg.style.color = "green";
+        this.reset();
+      }
+    });
+
+    // To-Do List
+    function addTask() {
+      const input = document.getElementById("todoInput");
+      const taskText = input.value.trim();
+      if (!taskText) return;
+      const li = document.createElement("li");
+      li.textContent = taskText;
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Delete";
+      removeBtn.onclick = () => li.remove();
+      li.appendChild(removeBtn);
+      document.getElementById("todoList").appendChild(li);
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
